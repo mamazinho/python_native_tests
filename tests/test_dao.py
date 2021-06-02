@@ -1,24 +1,26 @@
 from daos.dao import Dao
+import pytest
 
 class TestDao:
 
-    def __init__(self):
-        self.dao = Dao('test_database')
-        self.test_dao_instance()
-        self.test_dao_wrong_instance()
-        self.test_dao_create()
-        self.test_dao_read()
-    
     def test_dao_instance(self):
-        assert isinstance(self.dao, Dao), f'{self.dao} is not a Dao instance'
+        dao = Dao('test_database')
+        assert isinstance(dao, Dao), f'{dao} is not a Dao instance'
 
     def test_dao_wrong_instance(self):
-        assert not isinstance(self.dao, str), f'{self.dao} should be a Dao instance'
+        dao = Dao('test_database')
+        assert not isinstance(dao, str), f'{dao} should be a Dao instance'
+
+    def test_dao_many_fields_in_instance(self):
+        with pytest.raises(TypeError):
+            Dao('test_database', 'mais um campo')
 
     def test_dao_create(self):
-        result = self.dao.create()
+        dao = Dao('test_database')
+        result = dao.create()
         assert result == 'Created'
 
     def test_dao_read(self):
-        result = self.dao.read()
+        dao = Dao('test_database')
+        result = dao.read()
         assert isinstance(result, list)

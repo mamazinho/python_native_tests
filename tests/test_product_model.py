@@ -1,46 +1,47 @@
 from models.product import Product
+import pytest
 
 class TestProductModel:
 
-    def __init__(self):
-        self.prod = Product('novo', 'novo prod', 20.20)
-        self.test_product_instance()
-        self.test_product_wrong_instance()
-        self.test_product_name_content()
-        self.test_product_name_type()
-        self.test_product_description_content()
-        self.test_product_description_type()
-        self.test_product_value_content()
-        self.test_product_value_type()
-        self.test_product_create()
-        self.test_product_read()
-    
     def test_product_instance(self):
-        assert isinstance(self.prod, Product), f'{self.prod} is not a Product instance'
+        prod = Product('novo', 'novo prod', 20.20)
+        assert isinstance(prod, Product), f'{prod} is not a Product instance'
 
     def test_product_wrong_instance(self):
-        assert not isinstance(self.prod, str), f'{self.prod} should be a Product instance'
+        prod = Product('novo', 'novo prod', 20.20)
+        assert not isinstance(prod, str), f'{prod} should be a Product instance'
+
+    def test_dao_many_fields_in_instance(self):
+        with pytest.raises(TypeError):
+            Product('novo', 'novo prod', 20.20, 'mais um campo')
 
     def test_product_name_content(self):
-        assert self.prod.name == 'novo'
+        prod = Product('novo', 'novo prod', 20.20)
+        assert prod.name == 'novo'
 
     def test_product_name_type(self):
-        assert isinstance(self.prod.name, str)
+        prod = Product('novo', 'novo prod', 20.20)
+        assert isinstance(prod.name, str)
 
     def test_product_description_content(self):
-        assert self.prod.description == 'novo prod'
+        prod = Product('novo', 'novo prod', 20.20)
+        assert prod.description == 'novo prod'
 
     def test_product_description_type(self):
-        assert isinstance(self.prod.description, str)
+        prod = Product('novo', 'novo prod', 20.20)
+        assert isinstance(prod.description, str)
 
     def test_product_value_content(self):
-        assert self.prod.value == 20.20
+        prod = Product('novo', 'novo prod', 20.20)
+        assert prod.value == 20.20
 
     def test_product_value_type(self):
-        assert isinstance(self.prod.value, float)
+        prod = Product('novo', 'novo prod', 20.20)
+        assert isinstance(prod.value, float)
 
     def test_product_create(self):
-        result = self.prod.create()
+        prod = Product('novo', 'novo prod', 20.20)
+        result = prod.create()
         assert result == 'Created'
 
     def test_product_read(self):

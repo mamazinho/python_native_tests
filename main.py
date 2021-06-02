@@ -1,8 +1,8 @@
 from models.category import Category
 from models.product import Product
-from tests.test_category_model import TestCategoryModel
-from tests.test_product_model import TestProductModel
-from tests.test_dao import TestDao
+from specs.test_category_model import TestCategoryModel
+from specs.test_product_model import TestProductModel
+from specs.test_dao import TestDao
 
 class Main:
 
